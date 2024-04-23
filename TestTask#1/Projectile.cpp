@@ -1,4 +1,5 @@
 #include "Projectile.h"
+#include "Table.h"
 
 #include <iostream>
 #include <fstream>
