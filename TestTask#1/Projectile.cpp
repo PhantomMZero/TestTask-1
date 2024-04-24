@@ -23,8 +23,14 @@
 
 Projectile::Projectile()
 {
+
+}
+
+void Projectile::calculate()
+{
+
 	//Конечно-разностная аппроксимация
-	double V1, x1, y1, t, V2, x2, y2, teta1, teta2; 
+	double V1, x1, y1, t, V2, x2, y2, teta1, teta2;
 	x1 = 0;
 	y1 = 0;
 	V1 = V0;
@@ -50,7 +56,6 @@ Projectile::Projectile()
 		x1 = x2;
 		y1 = y2;
 	}
-
 }
 
 void Projectile::setGr(double inputGr)
@@ -70,6 +75,7 @@ void Projectile::setLength(double inputLength)
 
 void Projectile::setDiameter(double inputDiameter)
 {
+
 }
 
 void Projectile::exportToXls()

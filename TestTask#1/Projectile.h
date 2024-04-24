@@ -6,6 +6,7 @@
 class Projectile {
 public:
 	Projectile();
+	void calculate();
 	void setGr(double inputGr);//¬вод градусов
 	void setV0(double inputV0);//¬вод начальной скорости
 	void setLength(double inputLength);//¬вод длины снар€да
