@@ -53,13 +53,32 @@ Projectile::Projectile()
 
 }
 
+void Projectile::setGr(double inputGr)
+{
+
+}
+
+void Projectile::setV0(double inputV0)
+{
+
+}
+
+void Projectile::setLength(double inputLength)
+{
+
+}
+
+void Projectile::setDiameter(double inputDiameter)
+{
+}
+
 void Projectile::exportToXls()
 {
 	std::fstream fout;
 
 	// opens an existing csv file or creates a new file. 
 	fout.open("results.csv", std::ios::out | std::ios::app);
-	fout << "Column0,Column1,Column2,Column3\n";
+	fout << "x,y,V,t\n";
 
 	for (int i = 0; i < trajectory.size(); ++i) {
 		fout << trajectory[i][0] << ','

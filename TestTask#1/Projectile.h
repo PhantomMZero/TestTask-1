@@ -6,6 +6,10 @@
 class Projectile {
 public:
 	Projectile();
+	void setGr(double inputGr);//¬вод градусов
+	void setV0(double inputV0);//¬вод начальной скорости
+	void setLength(double inputLength);//¬вод длины снар€да
+	void setDiameter(double inputDiameter);//¬вод диаметра снар€да
 	//double getSpeedOfProjectile(int t);//ќпределение скорости тела
 	//double getCoordinatesOnTrajectory(int t);//ќпределение координат тела с секундной точностью
 	double getCoordinatesOfDestination();//ќпределение точки падени€
