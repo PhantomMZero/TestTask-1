@@ -4,7 +4,7 @@
 
 int main() {
 
-	std::cout << "Select an action \n1. Start calculation with default parameters \n2.Change default parameters\n";
+	std::cout << "Select an action \n1. Start calculation with default parameters \n2. Change default parameters\n";
 	int selectedAction;
 	std::cin >> selectedAction;
 	Projectile projectile;

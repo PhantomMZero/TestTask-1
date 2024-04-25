@@ -1,5 +1,4 @@
 #include "Projectile.h"
-#include "Table.h"
 
 #include <iostream>
 #include <fstream>
@@ -28,7 +27,7 @@ Projectile::Projectile()
 
 void Projectile::calculate()
 {
-
+	calculateSCrossSectionalArea(d);
 	//Конечно-разностная аппроксимация
 	double V1, x1, y1, t, V2, x2, y2, teta1, teta2;
 	x1 = 0;
@@ -38,20 +37,20 @@ void Projectile::calculate()
 	teta1 = rad;
 	trajectory.push_back({ x1, y1, V1, t });
 	while (true) {
-		V2 = V1 - dt * (k * pow(V1, 2) + g * sin(teta1));
+		//V2 = V1 - dt * (k * pow(V1, 2) + g * sin(teta1));
 		teta2 = teta1 - dt * g * cos(teta1) / V1;
 		x2 = x1 + (V1 * cos(teta1)) * dt;
 		y2 = y1 + (V1 * sin(teta1)) * dt;
 		t = t + dt;
-		trajectory.push_back({ x2, y2, V2, t });
+		//trajectory.push_back({ x2, y2, V2, t });
 		if (y2 <= 0) {
 			xOfDestination = x2;
-			std::cout << "V= " << V2 << "m/s\n";
+			//std::cout << "V= " << V2 << "m/s\n";
 			std::cout << "x= " << x2 << "m\n";
 			std::cout << "t= " << t << "sec\n";
 			break;
 		}
-		V1 = V2;
+		//V1 = V2;
 		teta1 = teta2;
 		x1 = x2;
 		y1 = y2;
@@ -60,23 +59,36 @@ void Projectile::calculate()
 
 void Projectile::setGr(double inputGr)
 {
-
+	gr = inputGr;
 }
 
 void Projectile::setV0(double inputV0)
 {
-
+	V0 = inputV0;
 }
 
 void Projectile::setLength(double inputLength)
 {
-
+	l = inputLength;
 }
 
 void Projectile::setDiameter(double inputDiameter)
 {
-
+	d = inputDiameter;
 }
+
+
+void Projectile::calculateAirResistanceForce(double height, double V) //Расчет силы сопротивления воздуха
+{
+	fAirResistance = c * atmParameters.findAirDensity(height) * (pow(V, 2) / 2)*sCSA;
+}
+
+void Projectile::calculateSCrossSectionalArea(double d)
+{
+	sCSA = 3.14 * pow((d / 2), 2);
+}
+
+
 
 void Projectile::exportToXls()
 {
@@ -95,6 +107,9 @@ void Projectile::exportToXls()
 
 
 }
+
+
+
 
 //double Projectile::getSpeedOfProjectile(int t)
 //{
