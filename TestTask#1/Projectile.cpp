@@ -79,6 +79,11 @@ void Projectile::setDiameter(double inputDiameter)
 	d = inputDiameter;
 }
 
+void Projectile::setMass(double mass)
+{
+	this->mass = mass;
+}
+
 
 void Projectile::calculateAirResistanceForce(double height, double V) //Расчет силы сопротивления воздуха
 {

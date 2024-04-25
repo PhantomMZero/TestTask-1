@@ -13,6 +13,7 @@ public:
 	void setV0(double inputV0);//Ввод начальной скорости
 	void setLength(double inputLength);//Ввод длины снаряда
 	void setDiameter(double inputDiameter);//Ввод диаметра снаряда
+	void setMass(double mass);
 	//double getSpeedOfProjectile(int t);//Определение скорости тела
 	//double getCoordinatesOnTrajectory(int t);//Определение координат тела с секундной точностью
 	double getCoordinatesOfDestination();//Определение точки падения
@@ -46,11 +47,7 @@ private:
 	//Пересчитать массу
 	double mass = 45.84; //kg mass of projectile mass of conical 3 + mass of cylinder 42 !hardcode	
 	double c = 0.05;//Коэффициент сопротивления воздуха
-	//SПоп. сеч
-	double fAirResistance = 0;//Сопротивление воздуха (Рассчитывается в функции calculateAirResistanceForce)
-	
-	//double k = ((c * PAir * 3.14 * pow((d / 2)/1000, 2))/(2*mass)); //coef of resistance
-	//k переделать F
+	double fAirResistance = 0;//Сопротивление воздуха (Рассчитывается в функции calculateAirResistanceForce) Н Ньютоны
 	double P = 7800; //steel density kg/m3 not using because of hardcode
 	std::vector<std::vector<double>> trajectory; //{ x1, y1, V1, t }
 	
