@@ -171,8 +171,11 @@ private:
 public:
 	double findAirDensity(double height) {
 		double airDensity = tableStandardAtmosphericParameters[0].p;
-		for (int i = tableStandardAtmosphericParameters[0].height; tableStandardAtmosphericParameters[i].height < height; ++i) {
+		for (int i = 0; i < tableStandardAtmosphericParameters.size(); ++i) {
 			airDensity = tableStandardAtmosphericParameters[i].p;
+			if (tableStandardAtmosphericParameters[i].height > height) {
+				break;
+			}
 		}
 		return airDensity;
 	}

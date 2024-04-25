@@ -37,10 +37,12 @@ void Projectile::calculate()
 	teta1 = rad;
 	trajectory.push_back({ x1, y1, V1, t });
 	while (true) {
-		//V2 = V1 - dt * (k * pow(V1, 2) + g * sin(teta1));
-		teta2 = teta1 - dt * g * cos(teta1) / V1;
-		x2 = x1 + (V1 * cos(teta1)) * dt;
-		y2 = y1 + (V1 * sin(teta1)) * dt;
+		calculateAirResistanceForce(y1, V1);
+		g=atmParameters.findAccelerationOfFreeFall(y1);
+		V2 = calculateV(teta1, V1);
+		teta2 = calculateTeta(teta1, V1);
+		x2 = calculateX(x1,teta1, V1);
+		y2 = calculateY(y1, teta1, V1);
 		t = t + dt;
 		//trajectory.push_back({ x2, y2, V2, t });
 		if (y2 <= 0) {
@@ -80,12 +82,32 @@ void Projectile::setDiameter(double inputDiameter)
 
 void Projectile::calculateAirResistanceForce(double height, double V) //Расчет силы сопротивления воздуха
 {
-	fAirResistance = c * atmParameters.findAirDensity(height) * (pow(V, 2) / 2)*sCSA;
+	fAirResistance = c * atmParameters.findAirDensity(height) * (pow(V, 2) / 2) * sCSA;
 }
 
 void Projectile::calculateSCrossSectionalArea(double d)
 {
 	sCSA = 3.14 * pow((d / 2), 2);
+}
+
+double Projectile::calculateTeta(double teta1, double V1)
+{
+	return teta1 - dt * g * cos(teta1) / V1;
+}
+
+double Projectile::calculateV(double teta1, double V1)
+{
+	return V1 - dt * (fAirResistance * pow(V1, 2) + g * sin(teta1));
+}
+
+double Projectile::calculateX(double x1, double teta1, double V1)
+{
+	return x1 + (V1 * cos(teta1)) * dt;
+}
+
+double Projectile::calculateY(double y1, double teta1, double V1)
+{
+	return y1 + (V1 * sin(teta1)) * dt;
 }
 
 

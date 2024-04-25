@@ -8,7 +8,6 @@
 class Projectile {
 public:
 	Projectile();
-	AtmosphericParameters atmParameters;
 	void calculate();
 	void setGr(double inputGr);//Ввод градусов
 	void setV0(double inputV0);//Ввод начальной скорости
@@ -20,8 +19,13 @@ public:
 	// getMass 1. Двигатель включен, 2. Двигатель выключен
 	void exportToXls();
 private:
-	void calculateAirResistanceForce(double height, double V);
-	void calculateSCrossSectionalArea(double d);
+	AtmosphericParameters atmParameters;
+	void calculateAirResistanceForce(double height, double V);//Вычисление силы сопротивления воздуха
+	void calculateSCrossSectionalArea(double d);//Вычисление площади сечения объекта
+	double calculateTeta(double teta1, double V1);//Вычисление угла
+	double calculateV(double teta1, double V1);//Вычисление скорости
+	double calculateX(double x1, double teta1, double V1);//Вычисление координаты X
+	double calculateY(double y1, double teta1, double V1);//Вычисление координаты Y
 	double x0=0;//x start coordinate
 	double y0=0;//y start coordinate
 	double xOfDestination=0;
