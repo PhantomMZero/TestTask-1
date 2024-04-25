@@ -87,7 +87,7 @@ void Projectile::setMass(double mass)
 
 void Projectile::calculateAirResistanceForce(double height, double V) //Расчет силы сопротивления воздуха
 {
-	fAirResistance = (c * atmParameters.findAirDensity(height) *pow(V, 2) * sCSA)/2;
+	fAirResistance = (c * atmParameters.findAirDensity(height) * pow(V, 2) * sCSA)/2;
 }
 
 void Projectile::calculateSCrossSectionalArea(double d)
@@ -102,7 +102,7 @@ double Projectile::calculateTeta(double teta1, double V1)
 
 double Projectile::calculateV(double teta1, double V1)
 {
-	return V1 - dt * (fAirResistance + g * sin(teta1));
+	return V1 - dt * (fAirResistance/mass + g * sin(teta1));
 }
 
 double Projectile::calculateX(double x1, double teta1, double V1)
