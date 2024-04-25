@@ -42,7 +42,7 @@ private:
 	double d = 120; //diameter in millimeters
 	double l = 600; //length in millimeters
 	double lk = 120; //length of conical part in millimeters
-	double PAir = 1.29; //average air density рассчитывается в функции findAirDensity
+	double PAir = 0; //Плотность воздуха рассчитывается в функции findAirDensity
 	//Пересчитать массу
 	double mass = 45.84; //kg mass of projectile mass of conical 3 + mass of cylinder 42 !hardcode	
 	double c = 0.05;//Коэффициент сопротивления воздуха

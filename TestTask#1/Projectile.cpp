@@ -44,15 +44,15 @@ void Projectile::calculate()
 		x2 = calculateX(x1,teta1, V1);
 		y2 = calculateY(y1, teta1, V1);
 		t = t + dt;
-		//trajectory.push_back({ x2, y2, V2, t });
+		trajectory.push_back({ x2, y2, V2, t });
 		if (y2 <= 0) {
 			xOfDestination = x2;
-			//std::cout << "V= " << V2 << "m/s\n";
+			std::cout << "V= " << V2 << "m/s\n";
 			std::cout << "x= " << x2 << "m\n";
 			std::cout << "t= " << t << "sec\n";
 			break;
 		}
-		//V1 = V2;
+		V1 = V2;
 		teta1 = teta2;
 		x1 = x2;
 		y1 = y2;
@@ -82,12 +82,12 @@ void Projectile::setDiameter(double inputDiameter)
 
 void Projectile::calculateAirResistanceForce(double height, double V) //Расчет силы сопротивления воздуха
 {
-	fAirResistance = c * atmParameters.findAirDensity(height) * (pow(V, 2) / 2) * sCSA;
+	fAirResistance = (c * atmParameters.findAirDensity(height) *pow(V, 2) * sCSA)/2;
 }
 
 void Projectile::calculateSCrossSectionalArea(double d)
 {
-	sCSA = 3.14 * pow((d / 2), 2);
+	sCSA = 3.14 * pow(((d / 1000) / 2), 2);
 }
 
 double Projectile::calculateTeta(double teta1, double V1)
@@ -97,7 +97,7 @@ double Projectile::calculateTeta(double teta1, double V1)
 
 double Projectile::calculateV(double teta1, double V1)
 {
-	return V1 - dt * (fAirResistance * pow(V1, 2) + g * sin(teta1));
+	return V1 - dt * (fAirResistance + g * sin(teta1));
 }
 
 double Projectile::calculateX(double x1, double teta1, double V1)
