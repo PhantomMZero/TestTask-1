@@ -123,6 +123,7 @@ double Projectile::findCCoef(double mach) {//Нахождение силы лобового сопротивле
 		double left = 0.40;
 		return left + (mach - 1.2) / (2 - 1.2) * (0.29 - 0.40);
 	}
+	if (mach > 2)return 0.29;
 }
 
 double Projectile::calculateVSound(double t)
