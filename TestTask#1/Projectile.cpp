@@ -20,11 +20,6 @@
 //Подъемная сила 0
 //Тяга 0
 
-Projectile::Projectile()
-{
-
-}
-
 void Projectile::calculate()
 {
 	calculateSCrossSectionalArea(d);
@@ -37,6 +32,7 @@ void Projectile::calculate()
 	teta1 = rad;
 	trajectory.push_back({ x1, y1, V1, t });
 	while (true) {
+		c=findCCoef(calculateMach(V1, calculateVSound(atmParameters.findAirTemperature(y1))));
 		calculateAirResistanceForce(y1, V1);
 		g=atmParameters.findAccelerationOfFreeFall(y1);
 		V2 = calculateV(teta1, V1);
@@ -85,37 +81,55 @@ void Projectile::setMass(double mass)
 }
 
 
-void Projectile::calculateAirResistanceForce(double height, double V) //Расчет силы сопротивления воздуха
+void Projectile::calculateAirResistanceForce(double height, double V)//Расчет силы сопротивления воздуха
 {
 	fAirResistance = (c * atmParameters.findAirDensity(height) * pow(V, 2) * sCSA)/2;
 }
 
-void Projectile::calculateSCrossSectionalArea(double d)
+void Projectile::calculateSCrossSectionalArea(double d)//Расчет площади круга
 {
 	sCSA = 3.14 * pow(((d / 1000) / 2), 2);
 }
 
-double Projectile::calculateTeta(double teta1, double V1)
+double Projectile::calculateTeta(double teta1, double V1)//Расчет угла в радианах
 {
 	return teta1 - dt * g * cos(teta1) / V1;
 }
 
-double Projectile::calculateV(double teta1, double V1)
+double Projectile::calculateV(double teta1, double V1)//Расчет скорости
 {
 	return V1 - dt * (fAirResistance/mass + g * sin(teta1));
 }
 
-double Projectile::calculateX(double x1, double teta1, double V1)
+double Projectile::calculateX(double x1, double teta1, double V1)//Расчет координаты X
 {
 	return x1 + (V1 * cos(teta1)) * dt;
 }
 
-double Projectile::calculateY(double y1, double teta1, double V1)
+double Projectile::calculateY(double y1, double teta1, double V1)//Расчет координаты Y
 {
 	return y1 + (V1 * sin(teta1)) * dt;
 }
 
+double Projectile::findCCoef(double mach) {//Нахождение силы лобового сопротивления
+	if (mach >= 1.1 && mach <= 2) {
+		double right = 0.05;
+		double left = 0.06;
+		return left + (mach - 1.1) / (2 - 1.1) * (0.05 - 0.06);
+	}
+	if (mach < 1.1) return 0.06;
+	if (mach > 2) return 0.05;
+}
 
+double Projectile::calculateVSound(double t)
+{
+	return 20.046796 * sqrt(atmParameters.CelsiusToKelvin(t));
+}
+
+double Projectile::calculateMach(double V, double Vsound)
+{
+	return V/Vsound;
+}
 
 void Projectile::exportToXls()
 {

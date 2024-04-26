@@ -169,6 +169,11 @@ private:
 	};
 
 public:
+
+	double CelsiusToKelvin(double tCelsius) {
+		return tCelsius + 273.15;
+	}
+
 	double findAirDensity(double height) {
 		double airDensity = tableStandardAtmosphericParameters[0].p;
 		for (int i = 0; i < tableStandardAtmosphericParameters.size(); ++i) {

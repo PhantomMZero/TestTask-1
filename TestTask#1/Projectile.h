@@ -7,7 +7,7 @@
 
 class Projectile {
 public:
-	Projectile();
+	Projectile()=default;
 	void calculate();
 	void setGr(double inputGr);//Ввод градусов
 	void setV0(double inputV0);//Ввод начальной скорости
@@ -21,8 +21,11 @@ public:
 	void exportToXls();
 private:
 	AtmosphericParameters atmParameters;
-	void calculateAirResistanceForce(double height, double V);//Вычисление силы сопротивления воздуха
-	void calculateSCrossSectionalArea(double d);//Вычисление площади сечения объекта
+	void calculateAirResistanceForce(double height, double V);//Вычисление силы сопротивления воздуха (c*PAirDensity*(V^2)/2*Sплощадь круга)
+	void calculateSCrossSectionalArea(double d);//Вычисление площади сечения объекта (Pi*r^2)
+	double findCCoef(double mach);//Нахождение коэффициента С
+	double calculateVSound(double t);//Нахождение скорости звука t в градусах цельсия (Vsound = 20,046796 sqrt(t))
+	double calculateMach(double V, double Vsound);//Нахождение маха (M=V/Vsound)
 	double calculateTeta(double teta1, double V1);//Вычисление угла
 	double calculateV(double teta1, double V1);//Вычисление скорости
 	double calculateX(double x1, double teta1, double V1);//Вычисление координаты X
