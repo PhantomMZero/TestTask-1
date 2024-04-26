@@ -23,8 +23,8 @@ private:
 	AtmosphericParameters atmParameters;
 	void calculateAirResistanceForce(double height, double V);//Вычисление силы сопротивления воздуха (c*PAirDensity*(V^2)/2*Sплощадь круга)
 	void calculateSCrossSectionalArea(double d);//Вычисление площади сечения объекта (Pi*r^2)
-	double findCCoef(double mach);//Нахождение коэффициента С
-	double calculateVSound(double t);//Нахождение скорости звука t в градусах цельсия (Vsound = 20,046796 sqrt(t))
+	double findCCoef(double mach);//Нахождение коэффициента С, для лямбда 1,5
+	double calculateVSound(double t);//Нахождение скорости звука, t в градусах цельсия (Vsound = 20,046796 sqrt(t))
 	double calculateMach(double V, double Vsound);//Нахождение маха (M=V/Vsound)
 	double calculateTeta(double teta1, double V1);//Вычисление угла
 	double calculateV(double teta1, double V1);//Вычисление скорости

@@ -45,7 +45,7 @@ void Projectile::calculate()
 			xOfDestination = x2;
 			std::cout << "V= " << V2 << "m/s\n";
 			std::cout << "x= " << x2 << "m\n";
-			std::cout << "t= " << t << "sec\n";
+			std::cout << "t= " << t << "sec\n-------------------------------------------------------\n";
 			break;
 		}
 		V1 = V2;
@@ -112,13 +112,17 @@ double Projectile::calculateY(double y1, double teta1, double V1)//Расчет коорди
 }
 
 double Projectile::findCCoef(double mach) {//Нахождение силы лобового сопротивления
-	if (mach >= 1.1 && mach <= 2) {
-		double right = 0.05;
-		double left = 0.06;
-		return left + (mach - 1.1) / (2 - 1.1) * (0.05 - 0.06);
+	if (mach >= 1 && mach <= 1.2) {
+		double right = 0.40;
+		double left = 0.26;
+		return left + (mach - 1) / (1.2 - 1) * (0.40 - 0.26);
 	}
-	if (mach < 1.1) return 0.06;
-	if (mach > 2) return 0.05;
+	if (mach < 1) return 0.26;
+	if (mach > 1.2&& mach<=2) {
+		double right = 0.29;
+		double left = 0.40;
+		return left + (mach - 1.2) / (2 - 1.2) * (0.29 - 0.40);
+	}
 }
 
 double Projectile::calculateVSound(double t)
